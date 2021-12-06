@@ -1,3 +1,10 @@
+<?php
+require_once('../auth/auth.php');
+
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
