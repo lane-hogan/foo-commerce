@@ -11,4 +11,3 @@ Webpage Structure for project
 
 */
 header('Location: components/index.php');
-?>

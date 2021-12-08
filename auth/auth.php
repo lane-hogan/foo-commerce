@@ -90,6 +90,11 @@ function sign_in($email, $password)
     return ['status' => 1, 'message' => 'Logged in successfully!'];
 }
 
+/**
+ * Signs a user out.
+ * 
+ * @return void
+ */
 function sign_out()
 {
     unset($_SESSION['user-id']);
@@ -99,7 +104,26 @@ function sign_out()
     header('Location: ../quotes/index.php');
 }
 
+/**
+ * Checks if a user is logged in.
+ * 
+ * @return bool user is logged in
+ */
 function is_logged()
 {
     return isset($_SESSION['user-id']);
+}
+
+/**
+ * Returns whether or not a user is an
+ * administrator.
+ * 
+ * @return bool user is an administrator
+ */
+function is_admin()
+{
+    if (is_logged()) {
+        // check the database
+    }
+    return false;
 }
