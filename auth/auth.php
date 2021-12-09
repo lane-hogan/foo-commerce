@@ -124,6 +124,12 @@ function is_admin()
 {
     if (is_logged()) {
         // check the database
+        $result = DBHelper::query('SELECT isAdmin FROM user WHERE user_ID = ? AND isAdmin = 1', [$_SESSION['user-id']]);
+
+        if ($result->rowCount() == 0) return false;
+
+        return $result->fetchColumn() == 1;
     }
+
     return false;
 }

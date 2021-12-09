@@ -1,4 +1,5 @@
 <?php
+require_once('../settings.php');
 require_once('../auth/auth.php');
 
 session_start();
