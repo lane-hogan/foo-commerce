@@ -43,7 +43,7 @@ if (count($_POST) > 0) {
 
             <div class="form-group mt-4">
                 <label for="password">Password:</label>
-                <input type="password" name="password" class="form-control" minlength="8" required>
+                <input type="password" name="password" placeholder="Enter password" class="form-control" minlength="8" required>
             </div>
 
             <button type="submit" class="btn btn-primary mt-4">Submit</button>
