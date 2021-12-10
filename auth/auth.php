@@ -68,24 +68,20 @@ function sign_in($email, $password)
     if (strlen($password) < 8) return ['status' => -1, 'message' => 'Please enter a password >=8 characters'];
 
     // check if the file containing banned users exists
-    if (file_exists('../data/banned.csv.php')) {
         // check if the email has not been banned
-        if (csv_element_in_file('../data/banned.csv.php', "{$email}")) {
-            return ['status' => -1, 'message' => 'Your email is banned'];
-        }
-    } else {
-        return ['status' => -1, 'message' => "Banned user's file doesn't exist."];
-    }
+    $result = DBHelper::query('SELECT * FROM users WHERE email = ?', [$_POST['email']]);
+    if($result->rowCount() == 0)
+        return ['status' => -1, 'message' => 'User does not exist!'];
 
-    // check if the file containing users exists
-    if (!file_exists('../data/users.csv.php')) return ['status' => -1, 'message' => "Users file doesn't exist!"];
+    $user = $result->fetch();
+    if ($user['isBanned'] == 1)
+        return ['status' => -1, 'message' => 'Your email is banned'];
+    
+    if (!password_verify($password, $user['password']))
+        return ['status' => -1, 'message' => 'Your password is incorrect.'];
+    
 
-    if (($user = csv_element_in_file('../data/users.csv.php', "$email;")) == null) return ['status' => -1, 'message' => 'User does not exist!'];
-
-    $user['data'] = explode(';', $user['data']);
-    if (!password_verify($password, trim($user['data'][1]))) return ['status' => -1, 'message' => 'Your password is incorrect.'];
-
-    $_SESSION['user-id'] = $user['index'];
+    $_SESSION['user-id'] = $user['user_ID'];
 
     return ['status' => 1, 'message' => 'Logged in successfully!'];
 }
