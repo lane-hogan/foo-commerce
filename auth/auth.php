@@ -56,7 +56,8 @@ function sign_in($email, $password)
 
     // check if the email is well formatted
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) ['status' => -1, 'message' => 'Your email is invalid'];
-    if (strlen($password) < 8) return ['status' => -1, 'message' => 'Please enter a password >=8 characters'];
+    if (strlen($password) < 8) 
+        return ['status' => -1, 'message' => 'Please enter a password >=8 characters'];
 
     // check if the file containing banned users exists
         // check if the email has not been banned
@@ -112,9 +113,7 @@ function is_admin()
     if (is_logged()) {
         // check the database
         $result = DBHelper::query('SELECT isAdmin FROM user WHERE user_ID = ? AND isAdmin = 1', [$_SESSION['user-id']]);
-
         if ($result->rowCount() == 0) return false;
-
         return $result->fetchColumn() == 1;
     }
 
