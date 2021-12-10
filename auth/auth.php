@@ -1,5 +1,5 @@
 <?php
-
+require_once('../lib/db_util.php');
 /**
  * Signs a user up using a CSV file.
  * Encrypts password to prevent it from being
@@ -12,41 +12,32 @@
 function sign_up($email, $password)
 {
     // check if the fields are empty
-    if (!isset($email)) ['status' => -1, 'message' => 'Please enter your email'];
-    if (!isset($password)) ['status' => -1, 'message' => 'Please enter your email'];
+    if (!isset($email)) 
+        return ['status' => -1, 'message' => 'Please enter your email'];
+    if (!isset($password)) 
+        return ['status' => -1, 'message' => 'Please enter your email'];
 
     // check if the email is valid
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) return ['status' => -1, 'message' => 'Your email is invalid'];
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) 
+        return ['status' => -1, 'message' => 'Your email is invalid'];
 
     // check if password length is between 8 characters
-    if (strlen($password) < 8) return ['status' => -1, 'message' => 'Please enter a password >=8 characters'];
+    if (strlen($password) < 8) 
+        return ['status' => -1, 'message' => 'Please enter a password >=8 characters'];
 
     // check if the password contains at least 2 special characters
-    if (!preg_match_all('/[£$%^&*#@]/', $password) >= 2) return ['status' => -1, 'message' => 'Your password should contain at least 2 special characters.'];
+    if (!preg_match_all('/[£$%^&*#@]/', $password) >= 2)
+        return ['status' => -1, 'message' => 'Your password should contain at least 2 special characters.'];
 
-    // check if the file containing banned users exists
-    if (file_exists('../data/banned.csv.php')) {
-        // check if the email has not been banned
-        if (csv_element_in_file('../data/banned.csv.php', "{$email}")) {
-            return ['status' => -1, 'message' => 'Your email is banned'];
-        }
-    } else {
-        return ['status' => -1, 'message' => "Banned user's file doesn't exist."];
-    }
-
-    // check if the file containing users exists
-    if (file_exists('../data/users.csv.php')) {
-        // check if the email is in the database already
-        if ((csv_element_in_file('../data/users.csv.php', $email)) != null) {
-            return ['status' => -1, 'message' => 'User already exists.'];
-        }
-    } else {
-        return ['status' => -1, 'message' => "Users file doesn't exist!"];
-    }
+    // check if the email is in the database already
+    $result = DBHelper::query('SELECT * FROM users WHERE email = ?', [$_POST['email']]);
+    if($result->rowCount() >0)
+        return ['status' => -1, 'message' => 'User exists!'];
 
     // save user in database
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    csv_add_element('../data/users.csv.php', "{$email};$hashedPassword");
+    DBHelper::insert('INSERT INTO users(email, password, isAdmin) VALUES(?, ?, 0)',
+    [$_POST['email'], $hashedPassword]);
 
     return ['status' => 1, 'message' => 'You have been registered!'];
 }
