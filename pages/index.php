@@ -11,8 +11,8 @@
 
 <body>
 <?php
-require_once('../../settings.php');
-require_once('../../lib/db_util.php');
+require_once('../settings.php');
+require_once('../lib/db_util.php');
 
 $result = DBHelper::query('SELECT * FROM products');
 // print_r($result->fetchAll());
@@ -33,7 +33,7 @@ while($product=$result -> fetch()){
             </div>
             <div class="image"> <img src="<?php echo $product["image"];?>" width="100"></div>
         </div>
-        <button class="btn btn-primary" ;>Add to cart</button>
+        <button class="btn btn-primary" position="fixed";  bottom="50px"; right="10px";>Add to cart</button>
     </div>
 </div>
 
