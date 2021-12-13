@@ -29,7 +29,7 @@ $product = $result->fetch();
 
         <div class="product-price">
             <span><?= $product['price'] ?></span>
-            <a href="#" class="cart-btn">Add to cart</a>
+            <a href="#" class="cart-btn">View Cart</a>
         </div>
     </div>
 
