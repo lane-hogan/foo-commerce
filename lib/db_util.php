@@ -47,11 +47,11 @@ class DBHelper
 
 /* INSERTING VALUES INTO THE DATABASE */
 
-// echo DBHelper::insert('INSERT INTO user(fname, lname, email, password, isAdmin) VALUES(?, ?, ?, ?, ?)',
-// ['Lane', 'Hogan', 'test@test.com', 'password123@#', 1]);
+echo DBHelper::insert('INSERT INTO user(fname, lname, email, password, isAdmin) VALUES(?, ?, ?, ?, ?)',
+['Lane', 'Hogan', 'test@test.com', 'password123@#', 1]);
 
 /* RETRIEVING VALUES FROM THE DATABASE */
 
-// $result = DBHelper::query('SELECT * FROM user WHERE isAdmin = 0');
+//$result = DBHelper::query('SELECT * FROM user WHERE isAdmin = 0');
 // echo '<pre>';
-// print_r($result->fetchAll());
+//print_r($result->fetchAll());
