@@ -10,4 +10,4 @@ Webpage Structure for project
 -Create, Delete, and Edit pages links will exist on admin page
 
 */
-header('Location: components/index.php');
+header('Location: pages/index.php');

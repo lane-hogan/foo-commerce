@@ -1,6 +1,7 @@
 <?php
 
-class Settings {
+class Settings
+{
     public static $env = 'dev';
 
     public static $environments = [
