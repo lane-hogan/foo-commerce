@@ -19,13 +19,12 @@ $result = DBHelper::query('SELECT * FROM products');
 
 while($product=$result -> fetch()){
 ?>
-
 <div class="d-flex justify-content-center ">
     <div class="card p-2">
         <div class="flex align-items-center ">
             <div class="mt-2">
                 <h4 class="text-uppercase">Foo</h4>
-                <div class="advisor_thumb"><a href="product_detail.php?product_ID=<?= $_GET['product_ID']; ?>"><img src="<?=$product["photo"];?>" alt=""></a>
+                <div class="advisor_thumb"><a href="detail.php?product_ID=<?= $product['product_ID']; ?>"><img src="<?=$product["image"];?>" width="200" height="auto" alt=""></a>
                 <div class="mt-4">
                     <h1 class="main-heading mt-0"><?php echo $product["name"];?></h1>
                     <div class="price"> <?php echo "$".$product["price"];?> </div>
