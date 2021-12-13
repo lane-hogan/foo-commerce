@@ -47,8 +47,8 @@ class DBHelper
 
 /* INSERTING VALUES INTO THE DATABASE */
 
-echo DBHelper::insert('INSERT INTO user(fname, lname, email, password, isAdmin) VALUES(?, ?, ?, ?, ?)',
-['Lane', 'Hogan', 'test@test.com', 'password123@#', 1]);
+//echo DBHelper::insert('INSERT INTO user(fname, lname, email, password, isAdmin) VALUES(?, ?, ?, ?, ?)',
+//['Lane', 'Hogan', 'test@test.com', 'password123@#', 1]);
 
 /* RETRIEVING VALUES FROM THE DATABASE */
 
