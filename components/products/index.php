@@ -1,7 +1,5 @@
 <?php
-require_once('../settings.php');
-require_once('../auth/auth.php');
-
+require_once('../foo-commerce/auth/auth.php');
 session_start();
 
 $result = DBHelper::query('SELECT * FROM products');
