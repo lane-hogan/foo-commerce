@@ -1,6 +1,6 @@
 <?php
-require_once('../../settings.php');
-require_once('../../lib/db_util.php');
+require_once('../settings.php');
+require_once('../lib/db_util.php');
 
 
 $result = DBHelper::query('SELECT * FROM products WHERE product_ID=?', [$_GET['product_ID']]);
