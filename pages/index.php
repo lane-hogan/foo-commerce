@@ -1,6 +1,6 @@
 <?php
-require_once('../../settings.php');
-require_once('../../lib/db_util.php');
+require_once('../settings.php');
+require_once('../lib/db_util.php');
 
 $result = DBHelper::query('SELECT * FROM products');
 ?>
@@ -17,7 +17,6 @@ $result = DBHelper::query('SELECT * FROM products');
 </head>
 
 <body>
-<<<<<<< HEAD
     <?php while ($product = $result->fetch()) : ?>
         <div class="d-flex justify-content-center ">
             <div class="card p-2">
@@ -33,26 +32,6 @@ $result = DBHelper::query('SELECT * FROM products');
                         <div class="image"> <img src="<?php echo $product["image"]; ?>" width="100"></div>
                     </div>
                     <button class="btn btn-primary" position="fixed" ; bottom="50px" ; right="10px" ;>Add to cart</button>
-=======
-<?php
-require_once('../settings.php');
-require_once('../lib/db_util.php');
-
-$result = DBHelper::query('SELECT * FROM products');
-// print_r($result->fetchAll());
-
-while($product=$result -> fetch()){
-?>
-<div class="d-flex justify-content-center ">
-    <div class="card p-2">
-        <div class="flex align-items-center ">
-            <div class="mt-2">
-                <h4 class="text-uppercase">Foo</h4>
-                <div class="advisor_thumb"><a href="detail.php?product_ID=<?= $product['product_ID']; ?>"><img src="<?=$product["image"];?>" width="200" height="auto" alt=""></a>
-                <div class="mt-4">
-                    <h1 class="main-heading mt-0"><?php echo $product["name"];?></h1>
-                    <div class="price"> <?php echo "$".$product["price"];?> </div>
->>>>>>> be9a1e021e48e4c745104381084f3b425d82a15d
                 </div>
             </div>
         <?php endwhile ?>
