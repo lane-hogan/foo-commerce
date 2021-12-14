@@ -7,12 +7,13 @@
 require_once('../auth/auth.php');
 
 session_start();
-
+//First conditional block is for creating a new product
 $result = DBHelper::query('SELECT * FROM categories');
 if (isset($_POST['product_name'])) {
     echo $_POST['product_name'];
     DBHelper::insert('INSERT INTO products(category_ID, image, description, price, name) VALUES(?, ?, ?, ?, ?)',[$_POST['category'],$_POST['image'],$_POST['description'],$_POST['price'],$_POST['product_name']]);
 }
+//Second conditional block handles the creation of a new category
 else if (isset($_POST['category_name'])) {
     echo $_POST['category_name'];
     while($category=$result -> fetch()) {
