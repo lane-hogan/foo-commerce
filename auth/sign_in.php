@@ -3,12 +3,11 @@ require_once('../lib/db_util.php');
 require_once('../auth/auth.php');
 session_start();
 
-if (is_logged()) header('Location: ../quotes/index.php');
-
 if (count($_POST) > 0) {
     $result = sign_in($_POST['email'], $_POST['password']);
 
     if ($result['status'] == 1) header('Location: ../quotes/index.php');
+    
 }
 ?>
 
@@ -42,7 +41,7 @@ if (count($_POST) > 0) {
 
             <div class="form-group mt-4">
                 <label for="password">Password:</label>
-                <input type="password" name="password" class="form-control" minlength="8" required>
+                <input type="password" name="password" placeholder="Enter password" class="form-control" minlength="8" required>
             </div>
 
             <button type="submit" class="btn btn-primary mt-4">Submit</button>

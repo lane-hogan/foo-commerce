@@ -1,6 +1,6 @@
 <?php
-require_once('../../settings.php');
-require_once('../../lib/db_util.php');
+require_once('../settings.php');
+require_once('../lib/db_util.php');
 
 
 $result = DBHelper::query('SELECT * FROM products WHERE product_ID=?', [$_GET['product_ID']]);
@@ -16,7 +16,7 @@ $product = $result->fetch();
 
 <body>
     <div class="left-column">
-        <img src="<?php echo $product["image"]; ?>">
+        <img src="<?php echo $product["image"]; ?>" width="200" height="auto">
     </div>
 
     <div class="right-column">
@@ -29,11 +29,11 @@ $product = $result->fetch();
 
         <div class="product-price">
             <span><?= $product['price'] ?></span>
-            <a href="#" class="cart-btn">Add to cart</a>
+            <a href="#" class="cart-btn">View Cart</a>
         </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5 .1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-    <a href="../products/index.php"><b>HOME</b></a>
+    <a href="../index.php"><b>HOME</b></a>
 </body>

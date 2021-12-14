@@ -43,7 +43,7 @@ if (count($_POST) > 0) {
 
             <div class="form-group mt-4">
                 <label for="password">Password:</label>
-                <input type="password" name="password" class="form-control" minlength="8" required>
+                <input type="password" name="password" placeholder="Enter password" class="form-control" minlength="8" required>
             </div>
 
             <button type="submit" class="btn btn-primary mt-4">Submit</button>
@@ -56,4 +56,5 @@ if (count($_POST) > 0) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 </body>
 
+<!--Just for Munene username: lung@gmail.com Password: heartheart@@-->
 </html>
