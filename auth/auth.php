@@ -72,7 +72,6 @@ function sign_in($email, $password)
     if (!password_verify($password, $user['password']))
         return ['status' => -1, 'message' => 'Your password is incorrect.'];
     
-
     $_SESSION['user-id'] = $user['user_ID'];
 
     return ['status' => 1, 'message' => 'Logged in successfully!'];
@@ -112,10 +111,12 @@ function is_admin()
 {
     if (is_logged()) {
         // check the database
-        $result = DBHelper::query('SELECT isAdmin FROM user WHERE user_ID = ? AND isAdmin = 1', [$_SESSION['user-id']]);
-        if ($result->rowCount() == 0) return false;
-        return $result->fetchColumn() == 1;
+        $result = DBHelper::query('SELECT isAdmin FROM users WHERE user_ID = ? AND isAdmin = 1', [$_SESSION['user-id']]);
+        if ($result->rowCount() == 0){
+            return false;
+            //return $result->fetchColumn() == 1;
+        } else {
+            return true;
+        }
     }
-
-    return false;
 }

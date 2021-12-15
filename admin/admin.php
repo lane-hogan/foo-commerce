@@ -1,9 +1,10 @@
 <?php
 require_once('../auth/auth.php');
-
+//*NOTE: if admin privileges are changed in the databse, the user has to relog in order to update those changes to their session
 session_start();
-
+    
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
