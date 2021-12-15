@@ -16,7 +16,6 @@ $product = $result->fetch();
 
 <body>
 
-
         <div class="container" style="padding-top: 40px; padding-right: 45px; float: left">
             <h1>Product Detail</h1>
             <div class="card" style="margin-right: 830px; padding:5px; ">

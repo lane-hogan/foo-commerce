@@ -26,16 +26,16 @@ $result = DBHelper::query('SELECT * FROM products');
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="index.php">Home</a>
+                <a class="nav-link" href="index.php"><b>Home</b></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="categories.php">Categories</a>
+                <a class="nav-link" href="categories.php"><b>Categories</b></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="orders.php">Orders</a>
+                <a class="nav-link" href="orders.php"><b>Orders</b></a>
             </li>
             <li class="nav-item">
-                <a href="../auth/sign_in.php" class="btn btn-primary" style="margin-left: 1280px; ">Sign In</a><br >
+                <a href="../auth/sign_in.php" class="btn btn-primary" style="margin-left: 1150px; ">Sign In</a><br >
             </li>
             <li class="nav-item">
                 <a href="../auth/sign_up.php" class="btn btn-primary" style="margin-left: 20px;">Sign Up</a>
