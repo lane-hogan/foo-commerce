@@ -1,7 +1,7 @@
 <?php
 require_once('../auth/auth.php');
-
 session_start();
+
 if (is_logged()) header('Location: ../quotes/index.php');
 
 if (count($_POST) > 0) {
@@ -26,9 +26,7 @@ if (count($_POST) > 0) {
 
     <!-- Sign up form -->
     <div class="container mt-4 border border-secondary rounded p-4">
-        <?php
-        if (isset($result)) :
-        ?>
+        <?php if (isset($result)) : ?>
             <div class="alert alert-<?= $result['status'] == -1 ? "danger" : "success" ?>" role="alert">
                 <?= $result['message']; ?>
             </div>
@@ -56,5 +54,11 @@ if (count($_POST) > 0) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 </body>
 
-<!--Just for Munene username: lung@gmail.com Password: heartheart@@-->
+<!--
+    Just for Munene:
+        
+    username: lung@gmail.com
+    Password: heartheart@@
+-->
+
 </html>

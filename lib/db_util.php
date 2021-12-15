@@ -15,8 +15,8 @@ class DBHelper
                 Settings::$environments[Settings::$env]['db_host'] .
                 ';dbname=' . Settings::$environments[Settings::$env]['db_name'] .
                 ';charset=' . Settings::$environments[Settings::$env]['db_charset'],
-                Settings::$environments[Settings::$env]['db_user'],
-                Settings::$environments[Settings::$env]['db_password'],
+            Settings::$environments[Settings::$env]['db_user'],
+            Settings::$environments[Settings::$env]['db_password'],
             Settings::$DB_OPTIONS
         );
     }
@@ -45,14 +45,3 @@ class DBHelper
         return self::$connection->lastInsertId();
     }
 }
-
-/* INSERTING VALUES INTO THE DATABASE */
-
-//echo DBHelper::insert('INSERT INTO user(fname, lname, email, password, isAdmin) VALUES(?, ?, ?, ?, ?)',
-//['Lane', 'Hogan', 'test@test.com', 'password123@#', 1]);
-
-/* RETRIEVING VALUES FROM THE DATABASE */
-
-//$result = DBHelper::query('SELECT * FROM user WHERE isAdmin = 0');
-// echo '<pre>';
-//print_r($result->fetchAll());
