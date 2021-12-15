@@ -2,6 +2,14 @@
 require_once('../lib/db_util.php');
 require_once('../auth/auth.php');
 session_start();
+//Easy accounts to remember
+/*
+    Username: lung@gmail.com 
+    Password: heartheart@@
+
+    Username: admin@gmail.com
+    Password: adminadmin@@
+*/
 
 if (count($_POST) > 0) {
     $result = sign_in($_POST['email'], $_POST['password']);
@@ -10,7 +18,9 @@ if (count($_POST) > 0) {
         header('Location: ../pages/index.php');
         $_SESSION['is_logged'] = true;
     }
-    
+    //By default, sets users to be normal users unless the isAdmin attribute in the database says otherwise
+    $_SESSION['is_admin'] = 0;
+    if(is_admin()) $_SESSION['is_admin'] = 1;
 }
 ?>
 
