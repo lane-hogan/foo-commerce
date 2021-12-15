@@ -2,6 +2,8 @@
 require_once('../auth/auth.php');
 
 session_start();
+
+if(!isset($_SESSION['is_admin'])) header("Location:../pages/index.php");
 $result = DBHelper::query('SELECT * FROM categories');
 $status = 0;
 
@@ -13,13 +15,25 @@ if (isset($_POST['product_ID'])){
             $status = 2;
         } else {
             $status = 1;
+            $result2 = DBHelper::query('SELECT * FROM `order-product` WHERE product_ID = ?', [$_POST['product_ID']]);
+            $orderProducts = $result2->fetchAll();
+            print_r($orderProducts);
+            $orders = [];
+            //Loop that gets the necessary orders that need to be deleted from the orders table
+            foreach($orderProducts as $orderProduct){
+                $orders[] = $orderProduct['order_ID'];
+            }
+            //Loop that deletes the necessary elements from the orders table
             DBHelper::query('DELETE FROM products WHERE product_ID = ?', [$_POST['product_ID']]);
+            foreach($orders as $order){
+                DBHelper::query('DELETE FROM orders WHERE order_ID = ?', [$order]);
+            }
         }
 }
 //Checks if category exists before deleting it
 if (isset($_POST['category_ID'])){
     $result1 = DBHelper::query('SELECT * FROM categories WHERE category_ID = ?', [$_POST['category_ID']]);
-        //Checks to make sure product exists first
+        //Checks to make sure the category exists first
         if($result1->rowCount() == 0){
             $status = 4;
         } else {
