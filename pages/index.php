@@ -1,3 +1,10 @@
+<?php
+require_once('../settings.php');
+require_once('../lib/db_util.php');
+
+$result = DBHelper::query('SELECT * FROM products');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,6 +17,7 @@
 </head>
 
 <body>
+
 <h1>Products</h1>
 <?php
 require_once('../settings.php');
@@ -41,6 +49,7 @@ while($product=$result -> fetch()){
 </body>
 
 </html>
+
 
 
 
