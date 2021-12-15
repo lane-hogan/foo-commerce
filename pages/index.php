@@ -1,7 +1,4 @@
 <?php
-echo 'Hey';
-die();
-
 $title = 'Foo Commerce';
 require_once('../theme/header.php');
 require_once('../settings.php');
