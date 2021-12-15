@@ -1,7 +1,7 @@
 <?php
 require_once("../lib/db_util.php");
 session_start();
-
+if(!isset($_SESSION['user-id'])) header('Location: index.php');
 //Finds all the different orders associated with one user
 $result = DBHelper::query('SELECT * FROM `user-order` WHERE user_ID = ?', [$_SESSION['user-id']]);
 $orders = $result->fetchAll();
