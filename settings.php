@@ -2,8 +2,7 @@
 
 class Settings
 {
-    public static $env = 'dev';
-
+    public static $env = 'deployment';
     public static $environments = [
         'dev' => [
             'db_host' => 'localhost',
@@ -12,7 +11,13 @@ class Settings
             'db_user' => 'root',
             'db_password' => '',
         ],
-        'deployment' => [],
+        'deployment' => [
+            'db_host' => 'us-cdbr-east-05.cleardb.net',
+            'db_name' => 'heroku_438e75cbc9ddd29',
+            'db_charset' => 'utf8',
+            'db_user' => 'bb33431abb192e',
+            'db_password' => '3a403929',
+        ],
     ];
 
     public static $DB_OPTIONS = [

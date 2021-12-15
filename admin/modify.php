@@ -13,7 +13,7 @@ if (isset($_POST['product_ID'])){
             $status = 2;
         } else {
             $status = 1;
-            DBHelper::query("UPDATE products SET category_ID=?, image=?, description=?, price=?, name=? WHERE product_ID=?", [$_POST['category_name'],$_POST['image'],$_POST['description'],$_POST['price'],$_POST['name'],$_POST['product_ID']]);
+            DBHelper::query("UPDATE products SET category_ID=?, image=?, description=?, price=?, name=? WHERE product_ID=?", [intval($_POST['category_name']),$_POST['image'],$_POST['description'],$_POST['price'],$_POST['name'],$_POST['product_ID']]);
         }
 }
 //If the altered category form is submitted, the category is altered
