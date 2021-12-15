@@ -57,12 +57,32 @@ if (isset($_POST['category_ID'])){
 <body>
     <!--Status bar, appears after form submission-->
     <?php
-        if ($status == 1) {?> <div class="alert alert-success" role="alert"><p>Product "<?=$_POST['product_ID']?>" deleted!</p></div> <?php }
-        else if ($status == 2) {?> <div class="alert alert-danger" role="alert"><p>Product "<?=$_POST['product_ID']?>" Doesn't exist!</p></div> <?php } 
-        else if ($status == 3) {?> <div class="alert alert-success" role="alert"><p>Category "<?=$_POST['category_ID']?>" deleted!</p></div> <?php }
-        else if ($status == 4) {?> <div class="alert alert-danger" role="alert"><p>Category "<?=$_POST['category_ID']?>" Doesn't exist!</p></div> <?php } 
-    ?>
- 
+    switch ($status):
+        case 1: ?>
+            <div class="alert alert-success" role="alert">
+                <p>Product "<?= $_POST['product_ID']; ?>" deleted!</p>
+            </div>
+            <?php break; ?>
+        <?php
+        case 2: ?>
+            <div class="alert alert-danger" role="alert">
+                <p>Product "<?= $_POST['product_ID']; ?>" doesn't exist!</p>
+            </div>
+            <?php break; ?>
+        <?php
+        case 3: ?>
+            <div class="alert alert-success" role="alert">
+                <p>Category "<?= $_POST['category_ID']; ?>" deleted!</p>
+            </div>
+            <?php break; ?>
+        <?php
+        case 4: ?>
+            <div class="alert alert-danger" role="alert">
+                <p>Category "<?= $_POST['category_ID']; ?>" doesn't exist!</p>
+            </div>
+            <?php break; ?>
+    <?php endswitch; ?>
+
 
     <!--Delete product form-->
     <div class="container mt-4 border border-secondary rounded p-4">
@@ -72,12 +92,10 @@ if (isset($_POST['category_ID'])){
                 <label for="product_ID">Product ID:</label>
                 <input type="text" name="product_ID" placeholder="ID" class="form-control" required />
             </div>
-            <button type="submit" class="btn btn-primary mt-4">Delete</button>
+            <button type="submit" class="btn btn-danger mt-4">Delete</button>
             <a href="delete.php" class="btn btn-secondary mt-4">Cancel</a>
         </form>
     </div>
-
-
 
     <!--Delete category form-->
     <div class="container mt-4 border border-secondary rounded p-4">
@@ -87,15 +105,14 @@ if (isset($_POST['category_ID'])){
                 <label for="category_ID">Category ID:</label>
                 <input type="text" name="category_ID" placeholder="ID" class="form-control" required />
             </div>
-            <button type="submit" class="btn btn-primary mt-4">Delete</button>
+            <button type="submit" class="btn btn-danger mt-4">Delete</button>
             <a href="delete.php" class="btn btn-secondary mt-4">Cancel</a>
         </form>
     </div>
 
-
-
-<!-- Bootstrap -->
+    <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-PsUw7Xwds7x08Ew3exXhqzbhuEYmA2xnwc8BuD6SEr+UmEHlX8/MCltYEodzWA4u" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
 </body>
+
 </html>
