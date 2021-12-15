@@ -52,23 +52,28 @@ $result = DBHelper::query('SELECT * FROM products');
         </div>
     </nav>
     <?php
-    $result = DBHelper::query('SELECT * FROM products');
-
-    while ($product = $result->fetch()) : ?>
-        <div class="col-md-3" style=" padding:10px; margin-left: 15px; margin-top: 10px; display: flex">
-            <a href="detail.php?product_ID=<?= $product['product_ID']; ?>">
-                <img src="<?= $product["image"]; ?>" width="300" alt="">
-            </a>
-            <div class="container" style="padding-left: 20px">
-                <h1><?= $product['name'] ?></h1>
-                <div class="product-price">
-                    <label><?= "<b>Price</b>: $" . $product["price"]; ?></label>
-                    <br>
-                    <a href="orders.php" class="btn btn-primary">Add to Cart</a>
+    $result = DBHelper::query('SELECT * FROM products'); ?>
+    <div class="container">
+        <div class="row">
+            <?php while ($product = $result->fetch()) : ?>
+                <div class="col-md-4" style="padding-bottom: 30px;">
+                    <div style="padding: 20px; height: 400px; background-color: #808080;">
+                        <a href="detail.php?product_ID=<?= $product['product_ID']; ?>">
+                            <img src="<?= $product["image"]; ?>" alt="product_image" width="300" alt="">
+                        </a>
+                        <div class="container" style="padding-left: 20px">
+                            <h1><?= $product['name'] ?></h1>
+                            <div class="product-price">
+                                <label><?= "<b>Price</b>: $" . $product["price"]; ?></label>
+                                <br>
+                                <a href="orders.php" class="btn btn-primary">Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            <?php endwhile; ?>
         </div>
-    <?php endwhile; ?>
+    </div>
 
     <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-PsUw7Xwds7x08Ew3exXhqzbhuEYmA2xnwc8BuD6SEr+UmEHlX8/MCltYEodzWA4u" crossorigin="anonymous"></script>

@@ -79,7 +79,7 @@ if (isset($_POST['category_ID'])) {
                 <label for="product_ID">Product ID:</label>
                 <input type="text" name="product_ID" placeholder="ID" class="form-control" required />
             </div>
-            <button type="submit" class="btn btn-primary mt-4">Delete</button>
+            <button type="submit" class="btn btn-danger mt-4">Delete</button>
             <a href="delete.php" class="btn btn-secondary mt-4">Cancel</a>
         </form>
     </div>
@@ -92,7 +92,7 @@ if (isset($_POST['category_ID'])) {
                 <label for="category_ID">Category ID:</label>
                 <input type="text" name="category_ID" placeholder="ID" class="form-control" required />
             </div>
-            <button type="submit" class="btn btn-primary mt-4">Delete</button>
+            <button type="submit" class="btn btn-danger mt-4">Delete</button>
             <a href="delete.php" class="btn btn-secondary mt-4">Cancel</a>
         </form>
     </div>
