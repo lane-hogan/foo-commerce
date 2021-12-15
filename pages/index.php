@@ -2,7 +2,7 @@
 $title = 'Foo Commerce';
 require_once('../theme/header.php');
 require_once('../settings.php');
-// require_once('../lib/db_util.php');
+require_once('../lib/db_util.php');
 
 session_start();
 
