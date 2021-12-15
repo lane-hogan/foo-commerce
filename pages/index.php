@@ -10,56 +10,59 @@ session_start();
 ?>
 
 <body>
+<<<<<<< HEAD
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="index.php" style="margin-left: 15px"><b>FOO-COMMERCE</b></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+=======
+
+    <nav class="p-2 navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.php"><b>FOO-COMMERCE</b></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportContent" aria-controls="navbarSupportContent" aria-expanded="false" aria-label="Toggle navigation">
+>>>>>>> 858c02be904c575e19b26daef3fd6f83b75611c7
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+        <div class="collapse navbar-collapse" id="navbarSupportContent">
+            <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.php"><b>Home</b></a>
+                    <a class="nav-link" href="index.php">Home<span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="categories.php"><b>Categories</b></a>
+                    <a class="nav-link" href="orders.php">Orders</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="orders.php"><b>Orders</b></a>
-                </li>
-                <?php if (!isset($_SESSION['is_logged'])) : ?>
-                    <li class="nav-item">
-                        <a href="../auth/sign_in.php" class="btn btn-primary" style="margin-left: 1150px; ">Sign In</a><br>
-                    </li>
-                    <li class="nav-item">
-                        <a href="../auth/sign_up.php" class="btn btn-primary" style="margin-left: 20px;">Sign Up</a>
-                    </li>
+            </ul>
+        </div>
+        <?php if (!isset($_SESSION['is_logged'])) : ?>
+                        <div class="form-inline">
+                            <a href="../auth/sign_in.php" class="mr-sm-2 btn btn-primary">Sign In</a>
+                            <a href="../auth/sign_up.php" class="my-2 my-sm-0 btn btn-primary"">Sign Up</a>
+                        </div>
                 <?php else : ?>
                     <li class="nav-item">
-                        <a href="../auth/sign_out.php" class="btn btn-primary" style="margin-left: 20px;">Sign Out</a>
+                        <a href="../auth/sign_out.php" class="btn btn-primary"">Sign Out</a>
                     </li>
                 <?php endif; ?>
-            </ul>
-
-        </div>
     </nav>
     <?php
-    $result = DBHelper::query('SELECT * FROM products');
-
-    while ($product = $result->fetch()) : ?>
-        <div class="col-md-3" style=" padding:10px; margin-left: 15px; margin-top: 10px; display: flex">
-            <a href="detail.php?product_ID=<?= $product['product_ID']; ?>">
-                <img src="<?= $product["image"]; ?>" width="300" alt="">
-            </a>
-            <div class="container" style="padding-left: 20px">
-                <h1><?= $product['name'] ?></h1>
-                <div class="product-price">
-                    <label><?= "<b>Price</b>: $" . $product["price"]; ?></label>
-                    <br>
-                    <a href="orders.php" class="btn btn-primary">Add to Cart</a>
+    $result = DBHelper::query('SELECT * FROM products'); ?>
+    <div class="container mt-4">
+        <div class="row" style="margin: 0 auto;">
+            <?php while ($product = $result->fetch()) : ?>
+                <div class="col-md-4" style="padding-bottom: 30px;">
+                    <div class="card border border-dark" style="width: 20rem;">
+                        <a href="detail.php?product_ID=<?= $product['product_ID']; ?>">
+                            <img class="p-2 card-img-top" src="<?= $product["image"]; ?>" alt="product_image" width="286" height="230" alt="">
+                        </a> <hr />
+                        <div class="card-body">
+                            <h5 class="card-title"><?= $product['name'] ?></h5>
+                            <p class="card-text"><?= "$" . $product["price"]; ?></p>
+                            <a href="orders.php" class="btn btn-primary">Add to Cart</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            <?php endwhile; ?>
         </div>
-    <?php endwhile; ?>
+    </div>
 
     <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-PsUw7Xwds7x08Ew3exXhqzbhuEYmA2xnwc8BuD6SEr+UmEHlX8/MCltYEodzWA4u" crossorigin="anonymous"></script>
