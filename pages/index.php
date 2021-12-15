@@ -1,7 +1,7 @@
 <?php
 require_once('../settings.php');
 require_once('../lib/db_util.php');
-
+session_start();
 $result = DBHelper::query('SELECT * FROM products');
 ?>
 
@@ -34,13 +34,23 @@ $result = DBHelper::query('SELECT * FROM products');
             <li class="nav-item">
                 <a class="nav-link" href="orders.php"><b>Orders</b></a>
             </li>
+            <?php if(!isset($_SESSION['is_logged'])){?>
             <li class="nav-item">
                 <a href="../auth/sign_in.php" class="btn btn-primary" style="margin-left: 1150px; ">Sign In</a><br >
             </li>
+            <?php } ?>
+            <?php if(!isset($_SESSION['is_logged'])){?>
             <li class="nav-item">
                 <a href="../auth/sign_up.php" class="btn btn-primary" style="margin-left: 20px;">Sign Up</a>
             </li>
+            <?php } ?>
+            <?php if(isset($_SESSION['is_logged'])){?>
+            <li class="nav-item">
+                <a href="../auth/sign_out.php" class="btn btn-primary" style="margin-left: 20px;">Sign Out</a>
+            </li>
+            <?php } ?>
         </ul>
+        
     </div>
 </nav>
 <?php
@@ -53,17 +63,17 @@ $result = DBHelper::query('SELECT * FROM products'); //selecting from the table 
 
 while($product=$result -> fetch()){
 ?>
-        <div class="col-md-3" style=" padding:10px; margin-left: 10px; margin-top: 10px; display: flex">
+
+        <div class="col-md-3" style=" padding:10px; margin-left: 15px; margin-top: 10px; display: flex">
             <a href="detail.php?product_ID=<?= $product['product_ID']; ?>"><img src="<?=$product["image"];?>" width="300"  alt=""></a>
             <div class="container" style="padding-left: 20px">
                 <h1><?= $product['name'] ?></h1>
                 <div class="product-price">
                     <label><?= "<b>Price</b>: $".$product["price"];?></label><br >
-                    <a href="#" class="btn btn-primary">Add to Cart</a>
+                    <a href="orders.php" class="btn btn-primary">Add to Cart</a>
                 </div>
             </div>
         </div>
-    <br >
     <?php
 }
 ?>

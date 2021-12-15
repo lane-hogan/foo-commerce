@@ -21,3 +21,4 @@ class Settings
         PDO::ATTR_EMULATE_PREPARES => false,
     ];
 }
+?>

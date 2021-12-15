@@ -23,7 +23,7 @@ $categories = $result->fetchAll();
            $products = DBHelper::query('SELECT * FROM products WHERE `category_ID` = ?', [$_GET['category_ID']]);
            $products = $products->fetchAll();
            foreach($products as $product){?>
-                </br></br><h2><a href="pages/detail.php?=<?=$product['product_ID']?>"><?= $product['name'] ?></br><img src="<?=$product['image']?>" width="300" height="auto"></a></h2>
+                </br></br><h2><a href="detail.php?product_ID=<?=$product['product_ID']?>"><?= $product['name'] ?></br><img src="<?=$product['image']?>" width="300" height="auto"></a></h2>
           <?php } ?>
     <?php } ?>
     <a href="index.php"><b>HOME</b></a>

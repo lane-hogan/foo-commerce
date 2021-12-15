@@ -6,7 +6,10 @@ session_start();
 if (count($_POST) > 0) {
     $result = sign_in($_POST['email'], $_POST['password']);
 
-    if ($result['status'] == 1) header('Location: ../quotes/index.php');
+    if ($result['status'] == 1){
+        header('Location: ../pages/index.php');
+        $_SESSION['is_logged'] = true;
+    }
     
 }
 ?>
