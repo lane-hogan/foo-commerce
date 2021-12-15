@@ -1,11 +1,12 @@
 <?php
 require_once('../settings.php');
 require_once('../lib/db_util.php');
-
+session_start();
 
 $result = DBHelper::query('SELECT * FROM products WHERE product_ID=?', [$_GET['product_ID']]); //getting product_id of the products to get the detail of the product
 $product = $result->fetch();
 ?>
+<?php print_r($_SESSION); ?>
 
 <html lang="en">
 <!-- https://www.bootdey.com/snippets/view/team-user-resume#html -->
@@ -19,6 +20,21 @@ $product = $result->fetch();
 
         <div class="container" style="padding-top: 40px; padding-right: 45px; float: left">
             <h1>Product Detail</h1>
+            <?php if(!isset($_SESSION['is_logged'])){?>
+            <li class="nav-item">
+                <a href="../auth/sign_in.php" class="btn btn-primary" style="margin-left: 1280px; ">Sign In</a><br >
+            </li>
+            <?php } ?>
+            <?php if(!isset($_SESSION['is_logged'])){?>
+            <li class="nav-item">
+                <a href="../auth/sign_up.php" class="btn btn-primary" style="margin-left: 20px;">Sign Up</a>
+            </li>
+            <?php } ?>
+            <?php if(isset($_SESSION['is_logged'])){?>
+            <li class="nav-item">
+                <a href="../auth/sign_out.php" class="btn btn-primary" style="margin-left: 20px;">Sign Out</a>
+            </li>
+            <?php } ?>
             <div class="card" style="margin-right: 830px; padding:5px; ">
                 <img src="<?php echo $product["image"]; ?>" width="200" height="auto" style="padding-top: 10px" ">
                 <div class="container">
@@ -27,12 +43,13 @@ $product = $result->fetch();
                     <p><?= $product['description'] ?></p>
                     <div class="product-price">
                         <label><?= "<b>Price</b>: $".$product["price"];?></label><br >
-                        <a href="#" class="btn btn-primary">View Cart</a>
+                        <a href="orders.php?user_ID=<?=$_SESSION['user-id']?>" class="btn btn-primary">View Cart</a>
                     </div>
                 </div>
             </div><br >
             <a href="categories.php"><b>Categories</b></a><br >
             <a href="index.php"><b>HOME</b></a>
+            
 
 
 

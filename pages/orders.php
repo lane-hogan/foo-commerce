@@ -7,6 +7,7 @@ session_start();
 //Finds all the different orders associated with one user
 $result = DBHelper::query('SELECT * FROM `user-order` WHERE `user_ID` = ?', [$_SESSION['user-id']]);
 $orders = $result->fetchAll();
+
 ?>
 <body>
 <?php
@@ -24,7 +25,8 @@ foreach($orders as $order){
         $productName = $temp1->fetchAll(); ?>
         <h5><?= "Product Name:"." ".$productName[$count]['name']; ?></h5>
         <?php $count++ ?>
-    <?php } ?>
-<?php } ?>
+    <?php } 
+} ?>
+
 </body>
 </html>

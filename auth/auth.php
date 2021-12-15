@@ -89,7 +89,7 @@ function sign_out()
     session_destroy();
 
     // redirect the user to the public page.
-    header('Location: ../quotes/index.php');
+    header('Location: ../pages/index.php');
 }
 
 /**
