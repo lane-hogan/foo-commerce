@@ -7,9 +7,9 @@ $status = 0;
 
 // If the delete product form is submitted, the product is deleted.
 if (isset($_POST['product_ID'])) {
-    $result1 = DBHelper::query('SELECT * FROM products WHERE product_ID = ?', [$_POST['product_ID']]);
+    $product = DBHelper::query('SELECT * FROM products WHERE product_ID = ?', [$_POST['product_ID']]);
     //Checks to make sure product exists first
-    if ($result1->rowCount() == 0) {
+    if ($product->rowCount() == 0) {
         $status = 2;
     } else {
         $status = 1;
@@ -19,9 +19,9 @@ if (isset($_POST['product_ID'])) {
 
 // Checks if category exists before deleting it
 if (isset($_POST['category_ID'])) {
-    $result1 = DBHelper::query('SELECT * FROM categories WHERE category_ID = ?', [$_POST['category_ID']]);
+    $category = DBHelper::query('SELECT * FROM categories WHERE category_ID = ?', [$_POST['category_ID']]);
     // Checks to make sure product exists first
-    if ($result1->rowCount() == 0) {
+    if ($category->rowCount() == 0) {
         $status = 4;
     } else {
         $status = 3;
