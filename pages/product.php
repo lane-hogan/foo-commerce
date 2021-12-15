@@ -17,44 +17,32 @@ $result = DBHelper::query('SELECT * FROM products');
 </head>
 
 <body>
-<h1><b>Products</b></h1>
+    <h1><b>Products</b></h1>
 
-<?php
-require_once('../settings.php');
-require_once('../lib/db_util.php');
+    <?php
+    $result = DBHelper::query('SELECT * FROM products');
 
-$result = DBHelper::query('SELECT * FROM products'); //selecting from the table products from the database
-
-//using while loop to get the data from the database
-
-while($product=$result -> fetch()){
-    ?>
-    <div class="col-md-3" style=" padding:10px; margin-left: 10px; margin-top: 10px; display: flex">
-        <a href="detail.php?product_ID=<?= $product['product_ID']; ?>"><img src="<?=$product["image"];?>" width="300"  alt=""></a>
-        <div class="container" style="padding-left: 20px">
-            <h1><?= $product['name'] ?></h1>
-            <div class="product-price">
-                <label><?= "<b>Price</b>: $".$product["price"];?></label><br >
-                <a href="#" class="btn btn-primary">Add to Cart</a>
+    while ($product = $result->fetch()) : ?>
+        <div class="col-md-3" style=" padding:10px; margin-left: 10px; margin-top: 10px; display: flex">
+            <a href="detail.php?product_ID=<?= $product['product_ID']; ?>">
+                <img src="<?= $product["image"]; ?>" width="300">
+            </a>
+            <div class="container" style="padding-left: 20px">
+                <h1><?= $product['name']; ?></h1>
+                <div class="product-price">
+                    <label><?= "<b>Price</b>: $" . $product["price"]; ?></label><br>
+                    <a href="#" class="btn btn-primary">Add to Cart</a>
+                </div>
             </div>
         </div>
-    </div>
-    <br >
-    <?php
-}
-?>
+        <br>
+    <?php endwhile; ?>
 
-<!-- Bootstrap -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-PsUw7Xwds7x08Ew3exXhqzbhuEYmA2xnwc8BuD6SEr+UmEHlX8/MCltYEodzWA4u" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-PsUw7Xwds7x08Ew3exXhqzbhuEYmA2xnwc8BuD6SEr+UmEHlX8/MCltYEodzWA4u" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
 
-<a href="index.php"><b>HOME</b></a>
+    <a href="index.php"><b>HOME</b></a>
 </body>
 
 </html>
-
-
-
-
-
-

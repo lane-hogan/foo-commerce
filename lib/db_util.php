@@ -15,8 +15,8 @@ class DBHelper
                 Settings::$environments[Settings::$env]['db_host'] .
                 ';dbname=' . Settings::$environments[Settings::$env]['db_name'] .
                 ';charset=' . Settings::$environments[Settings::$env]['db_charset'],
-                Settings::$environments[Settings::$env]['db_user'],
-                Settings::$environments[Settings::$env]['db_password'],
+            Settings::$environments[Settings::$env]['db_user'],
+            Settings::$environments[Settings::$env]['db_password'],
             Settings::$DB_OPTIONS
         );
     }
