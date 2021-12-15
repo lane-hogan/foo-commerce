@@ -1,32 +1,27 @@
-#Category creation is done - when user subimts form, checks if the category already exist. 
-#If it exists, message is displayed. If it does not exist, category is created and a message is displayed.
-
-#Product creation is done - when user submits the form, the product is created.
-
 <?php
 require_once('../auth/auth.php');
 
 session_start();
-//First conditional block is for creating a new product
 $result = DBHelper::query('SELECT * FROM categories');
+$status = 0;
+
+//If the new product form is submitted, the product is created.
 if (isset($_POST['product_name'])) {
-    echo $_POST['product_name'];
+    $status = 1;
     DBHelper::insert('INSERT INTO products(category_ID, image, description, price, name) VALUES(?, ?, ?, ?, ?)',[$_POST['category'],$_POST['image'],$_POST['description'],$_POST['price'],$_POST['product_name']]);
 }
-//Second conditional block handles the creation of a new category
+//If the new category form was submitted, checks if the category already exists. If not, it is created.
 else if (isset($_POST['category_name'])) {
-    echo $_POST['category_name'];
     while($category=$result -> fetch()) {
         if ($category['name'] == $_POST['category_name']) {
-            echo 'Category already exists!';
-            break;
+            $status = 3;
         }
+    }
+    if ($status != 3) { 
         DBHelper::insert('INSERT INTO categories(name) VALUES(?)',[$_POST['category_name']]);
-        echo 'Category created!';
-        break;
+        $status = 2;
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -41,6 +36,14 @@ else if (isset($_POST['category_name'])) {
 </head>
 
 <body>
+    <!--Status bar, appears after form submission-->
+    <?php
+        if ($status == 1) {?> <div class="alert alert-success" role="alert"><p>Product "<?=$_POST['product_name']?>" created!</p></div> <?php }
+        else if ($status == 2) {?> <div class="alert alert-success" role="alert"><p>Category "<?=$_POST['category_name']?>" created!</p></div> <?php }
+        else if ($status == 3) {?> <div class="alert alert-danger" role="alert"><p>Category "<?=$_POST['category_name']?>" already exists!</p></div> <?php } 
+    ?>
+ 
+
     <!--Create product form-->
     <div class="container mt-4 border border-secondary rounded p-4">
         <form action="create.php" method="POST">
