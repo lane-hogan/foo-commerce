@@ -3,7 +3,7 @@ require_once('../settings.php');
 require_once('../lib/db_util.php');
 
 
-$result = DBHelper::query('SELECT * FROM products WHERE product_ID=?', [$_GET['product_ID']]);
+$result = DBHelper::query('SELECT * FROM products WHERE product_ID=?', [$_GET['product_ID']]); //getting product_id of the products to get the detail of the product
 $product = $result->fetch();
 ?>
 
@@ -31,7 +31,8 @@ $product = $result->fetch();
                     </div>
                 </div>
             </div><br >
-            <a href="../index.php"><b>HOME</b></a>
+            <a href="categories.php"><b>Categories</b></a><br >
+            <a href="index.php"><b>HOME</b></a>
 
 
 
