@@ -27,6 +27,7 @@ if (isset($_POST['product_ID'])){
             DBHelper::query('DELETE FROM products WHERE product_ID = ?', [$_POST['product_ID']]);
             foreach($orders as $order){
                 DBHelper::query('DELETE FROM orders WHERE order_ID = ?', [$order]);
+                DBHelper::query('DELETE FROM `user-order` WHERE order_ID = ?', [$order]);
             }
         }
 }

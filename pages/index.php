@@ -2,7 +2,7 @@
 $title = 'Foo Commerce';
 require_once('../theme/header.php');
 require_once('../settings.php');
-// require_once('../lib/db_util.php');
+require_once('../lib/db_util.php');
 
 session_start();
 
@@ -10,16 +10,10 @@ session_start();
 ?>
 
 <body>
-<<<<<<< HEAD
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="index.php" style="margin-left: 15px"><b>FOO-COMMERCE</b></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-=======
 
     <nav class="p-2 navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="index.php"><b>FOO-COMMERCE</b></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportContent" aria-controls="navbarSupportContent" aria-expanded="false" aria-label="Toggle navigation">
->>>>>>> 858c02be904c575e19b26daef3fd6f83b75611c7
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportContent">
