@@ -1,7 +1,10 @@
 <?php
+echo 'Hey';
+die();
 require_once('../settings.php');
 require_once('../lib/db_util.php');
 session_start();
+
 
 $result = DBHelper::query('SELECT * FROM products');
 ?>
