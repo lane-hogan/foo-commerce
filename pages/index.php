@@ -10,6 +10,7 @@
 </head>
 
 <body>
+<h1>Products</h1>
 <?php
 require_once('../settings.php');
 require_once('../lib/db_util.php');
@@ -19,32 +20,28 @@ $result = DBHelper::query('SELECT * FROM products');
 
 while($product=$result -> fetch()){
 ?>
-
-<div class="d-flex justify-content-center ">
-    <div class="card p-2">
-        <div class="flex align-items-center ">
-            <div class="mt-2">
-                <h4 class="text-uppercase">Foo</h4>
-                <div class="advisor_thumb"><a href="product_detail.php?product_ID=<?= $_GET['product_ID']; ?>"><img src="<?=$product["photo"];?>" alt=""></a>
-                <div class="mt-4">
-                    <h1 class="main-heading mt-0"><?php echo $product["name"];?></h1>
-                    <div class="price"> <?php echo "$".$product["price"];?> </div>
+        <div class="col-md-3" style=" padding:10px; margin-left: 10px; margin-top: 10px; display: flex">
+            <a href="detail.php?product_ID=<?= $product['product_ID']; ?>"><img src="<?=$product["image"];?>" width="300"  alt=""></a>
+            <div class="container" style="padding-left: 20px">
+                <h1><?= $product['name'] ?></h1>
+                <div class="product-price">
+                    <label><?= "<b>Price</b>: $".$product["price"];?></label><br >
+                    <a href="#" class="btn btn-primary">Add to Cart</a>
                 </div>
             </div>
-            <div class="image"> <img src="<?php echo $product["image"];?>" width="100"></div>
-        </div>
-        <button class="btn btn-primary" position="fixed";  bottom="50px"; right="10px";>Add to cart</button>
-    </div>
-</div>
-
-<?php
+        </div><br >
+    <?php
 
 }
 ?>
+<a href="../index.php"><b>HOME</b></a>
     <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-PsUw7Xwds7x08Ew3exXhqzbhuEYmA2xnwc8BuD6SEr+UmEHlX8/MCltYEodzWA4u" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
 </body>
 
 </html>
+
+
+
 
