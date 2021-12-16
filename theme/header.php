@@ -40,7 +40,7 @@
                 <?php if(isset($_SESSION['is_admin'])) {
                         if($_SESSION['is_admin'] == 1){?>
                             <a href='../admin/admin.php' class="mr-sm-2 btn btn-warning">Admin Tools</a>
-                    <?php } print_r($_SESSION);
+                    <?php }
                     } ?>
                 <a href="../auth/sign_out.php" class="mr-sm-2 btn btn-danger">Sign Out</a>
             </div>            

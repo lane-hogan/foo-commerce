@@ -20,7 +20,9 @@ function sign_up($email, $password, $fname, $lname)
         return ['status' => -1, 'message' => 'Please enter your first name'];
     if (!isset($lname))
         return ['status' => -1, 'message' => 'Please enter your last name'];
-    
+    if (!isset($address))
+        return ['status' => -1, 'message' => 'Please enter your address'];
+
         // Check if the email is valid
     if (!filter_var($email, FILTER_VALIDATE_EMAIL))
         return ['status' => -1, 'message' => 'Your email is invalid'];
