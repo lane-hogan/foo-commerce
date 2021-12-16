@@ -3,7 +3,8 @@ $title = 'Sign Up';
 require_once('../theme/header.php');
 require_once('../auth/auth.php');
 
-if (is_logged()) header('Location: ../quotes/index.php');
+//First checks if user is logged, if not it redirects them to the home page
+if (is_logged()) header('Location: ../pages/index.php');
 if (count($_POST) > 0) :
     $result = sign_up($_POST['email'], $_POST['password'], $_POST['fname'], $_POST['lname']);
     if ($result['status'] == 1) header('Location: sign_in.php');
@@ -17,21 +18,25 @@ endif;
             <?= $result['message']; ?>
         </div>
     <?php endif; ?>
-
+    <!-- Sign up-->
     <form action="sign_up.php" method="POST">
         <h4 class="display-4">Sign up</h4>
+        <!-- First Name-->
         <div class="form-group">
             <label for="fname">First Name:</label>
             <input type="text" name="fname" placeholder="First name" class="form-control" required />
         </div>
+        <!-- Last Name-->
         <div class="form-group">
             <label for="lname">Last Name:</label>
             <input type="text" name="lname" placeholder="Last name" class="form-control" required />
         </div>
+        <!-- Email-->
         <div class="form-group">
             <label for="email">Email:</label>
             <input type="email" name="email" placeholder="Enter email" class="form-control" required />
         </div>
+        <!-- Password-->
         <div class="form-group mt-4">
             <label for="password">Password:</label>
             <input type="password" name="password" placeholder="Enter password" class="form-control" minlength="8" required>

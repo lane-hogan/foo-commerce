@@ -4,6 +4,7 @@ require_once('../settings.php');
 
 class DBHelper
 {
+    //DBHelper class used to interact with the database
     static $connection;
 
     private static function connect()

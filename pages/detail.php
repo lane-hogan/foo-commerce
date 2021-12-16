@@ -7,6 +7,7 @@ require_once('../lib/db_util.php');
 $result = DBHelper::query('SELECT * FROM products WHERE product_ID=?', [$_GET['product_ID']]);
 $product = $result->fetch(); ?>
 
+<!--Displays product details-->
 <div class="container mt-4 d-flex justify-content-center">
     <div class="card border border-dark" style="width: 20rem;">
         <a href="detail.php?product_ID=<?= $product['product_ID']; ?>">

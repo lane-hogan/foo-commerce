@@ -4,7 +4,9 @@ require_once('../theme/header.php');
 require_once('../lib/db_util.php');
 require_once('../auth/auth.php');
 
+//Checks if form is submitted 
 if (count($_POST) > 0) :
+    //Uses sign_in function in auth.php to authenticate the user with the database
     $result = sign_in($_POST['email'], $_POST['password']);
     if ($result['status'] == 1) :
         header('Location: ../pages/index.php');
@@ -23,9 +25,10 @@ endif;
             <?= $result['message']; ?>
         </div>
     <?php endif; ?>
-
+    <!--Sign In-->
     <form action="sign_in.php" method="POST">
         <h4 class="display-4">Sign in</h4>
+        <!--S-->
         <div class="form-group">
             <label for="email">Email:</label>
             <input type="email" name="email" placeholder="Enter email" class="form-control" required />

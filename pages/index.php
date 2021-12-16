@@ -5,9 +5,10 @@ require_once('../settings.php');
 require_once('../lib/db_util.php');
 
 $result = DBHelper::query('SELECT * FROM products'); ?>
-
+<!--Prints product cards on main index page-->
 <div class="container mt-4">
     <div class="row" style="margin: 0 auto;">
+    <!--Loop used to display all products-->
         <?php while ($product = $result->fetch()) : ?>
             <div class="col-md-4" style="padding-bottom: 30px;">
                 <div class="card border border-dark" style="width: 20rem;">

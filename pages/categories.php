@@ -17,16 +17,19 @@ $categories = $result->fetchAll();
         </div>
     <?php endforeach; ?>
 </div><hr/>
-
+<!--Makes sure category exists-->
 <?php if (isset($_GET['category_ID'])) : ?>
     <h2 style="text-align: center;"><?= $_GET['name']?></h2>
+    <!--Query that finds all the products within a category-->
     <?php $products = DBHelper::query('SELECT * FROM products WHERE `category_ID` = ?', [$_GET['category_ID']]);
     if ($products->rowCount() == 0) : ?>
         <h4 style="text-align: center; color: #999999"><i>There are no products in this category.</i></h4>
+    <!--Main block of code that displays all the different products within a category-->
     <?php endif;
         $products = $products->fetchAll(); ?>
         <div class=" container mt-4">
             <div class="row" style="margin: 0 auto;">
+                <!--Loop used to search through products and get their data-->
                 <?php foreach ($products as $product) : ?>
                     <div class="col-md-4" style="padding-bottom: 30px;">
                         <div class="card border border-dark" style="width: 20rem;">
