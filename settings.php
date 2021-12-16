@@ -2,7 +2,7 @@
 
 class Settings
 {
-    public static $env = 'deployment';
+    public static $env = 'dev';
     public static $environments = [
         'dev' => [
             'db_host' => 'localhost',
