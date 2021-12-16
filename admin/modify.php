@@ -3,6 +3,7 @@ require_once('../auth/auth.php');
 
 session_start();
 $result = DBHelper::query('SELECT * FROM categories');
+$categories = $result->fetchAll();
 $status = 0;
 
 //If the alter product form is submitted, the product is altered.
@@ -13,18 +14,19 @@ if (isset($_POST['product_ID'])){
             $status = 2;
         } else {
             $status = 1;
-            DBHelper::query("UPDATE products SET category_ID=?, image=?, description=?, price=?, name=? WHERE product_ID=?", [intval($_POST['category_name']),$_POST['image'],$_POST['description'],$_POST['price'],$_POST['name'],$_POST['product_ID']]);
+            DBHelper::query("UPDATE products SET category_ID=?, image=?, description=?, price=?, name=? WHERE product_ID=?", [intval($_POST['category_ID']),$_POST['image'],$_POST['description'],$_POST['price'],$_POST['name'],$_POST['product_ID']]);
         }
 }
 //If the altered category form is submitted, the category is altered
-if (isset($_POST['category_ID'])){
-    $result1 = DBHelper::query('SELECT * FROM categories WHERE category_ID = ?', [$_POST['category_ID']]);
+if (isset($_POST['category_name'])){
+    //*NOTE: The value of category name is technically category_ID
+    $result1 = DBHelper::query('SELECT * FROM categories WHERE category_ID = ?', [$_POST['category_name']]);
         //Checks to make sure category exists first
         if($result1->rowCount() == 0){
             $status = 4;
         } else {
             $status = 3;
-            DBHelper::query('DELETE FROM categories WHERE category_ID = ?', [$_POST['category_ID']]);
+            DBHelper::query('UPDATE categories SET name=? WHERE category_ID=?', [$_POST['new_category_name'],$_POST['category_name']]);
         }
 }
 ?>
@@ -45,8 +47,8 @@ if (isset($_POST['category_ID'])){
     <?php
         if ($status == 1) {?> <div class="alert alert-success" role="alert"><p>Product "<?=$_POST['product_ID']?>" Changed!</p></div> <?php }
         else if ($status == 2) {?> <div class="alert alert-danger" role="alert"><p>Product "<?=$_POST['product_ID']?>" Doesn't exist!</p></div> <?php } 
-        else if ($status == 3) {?> <div class="alert alert-success" role="alert"><p>Category "<?=$_POST['category_ID']?>" Changed!</p></div> <?php }
-        else if ($status == 4) {?> <div class="alert alert-danger" role="alert"><p>Category "<?=$_POST['category_ID']?>" Doesn't exist!</p></div> <?php } 
+        else if ($status == 3) {?> <div class="alert alert-success" role="alert"><p>Category "<?=$_POST['category_name']?>" Changed!</p></div> <?php }
+        else if ($status == 4) {?> <div class="alert alert-danger" role="alert"><p>Category "<?=$_POST['category_name']?>" Doesn't exist!</p></div> <?php } 
     ?>
  
 
@@ -59,8 +61,14 @@ if (isset($_POST['category_ID'])){
                 <input type="text" name="product_ID" placeholder="ID" class="form-control" required />
             </div>
             <div class="form-group">
-                <label for="product_ID">Category Name:</label>
-                <input type="text" name="category_name" placeholder="Name" class="form-control" required />
+                <label for="category">Category:</label>
+                <select name="category_ID" id="category" placeholder="---" class="form-control" required>
+                    <option>None</option>
+                    <?php
+                    foreach($categories as $category){ ?>
+                        <option value="<?= $category['category_ID'] ?>"><?= $category['name'] ?></option>
+                    <?php } ?>
+                </select>
             </div>
             <div class="form-group">
                 <label for="product_ID">Image Link:</label>
@@ -87,13 +95,23 @@ if (isset($_POST['category_ID'])){
 
     <!--Modify category form-->
     <div class="container mt-4 border border-secondary rounded p-4">
-        <form action="delete.php" method="POST">
-            <h5 class="display-5">Delete Category</h5>
+        <form action="modify.php" method="POST">
+            <h5 class="display-5">Modify Category</h5>
             <div class="form-group">
-                <label for="category_ID">Category ID:</label>
-                <input type="text" name="category_ID" placeholder="ID" class="form-control" required />
+                <label for="category">Category to be edited:</label>
+                <select name="category_name" id="category" placeholder="---" class="form-control" required>
+                    <option>None</option>
+                    <?php
+                    foreach($categories as $category){ ?>
+                        <option value="<?= $category['category_ID'] ?>"><?= $category['name'] ?></option>
+                    <?php } ?>
+                </select>
             </div>
-            <button type="submit" class="btn btn-primary mt-4">Delete</button>
+            <div class="form-group">
+                <label for="category_ID">New Category name:</label>
+                <input type="text" name="new_category_name" placeholder="name" class="form-control" required />
+            </div>
+            <button type="submit" class="btn btn-primary mt-4">Modify</button>
             <a href="delete.php" class="btn btn-secondary mt-4">Cancel</a>
         </form>
     </div>

@@ -103,8 +103,14 @@ if (isset($_POST['category_ID'])){
         <form action="delete.php" method="POST">
             <h5 class="display-5">Delete Category</h5>
             <div class="form-group">
-                <label for="category_ID">Category ID:</label>
-                <input type="text" name="category_ID" placeholder="ID" class="form-control" required />
+                <label for="category">Category:</label>
+                <select name="category_ID" id="category" placeholder="---" class="form-control" required>
+                    <option>None</option>
+                    <?php
+                    while ($category = $result->fetch()) : ?>
+                        <option value="<?= $category['category_ID'] ?>"><?= $category['name'] ?></option>
+                    <?php endwhile; ?>
+                </select>
             </div>
             <button type="submit" class="btn btn-danger mt-4">Delete</button>
             <a href="delete.php" class="btn btn-secondary mt-4">Cancel</a>
