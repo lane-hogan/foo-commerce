@@ -6,6 +6,10 @@ require_once("../lib/db_util.php");
 //If the user is not logged in, redirect to the home page.
 if(!isset($_SESSION['user-id'])) header('Location: index.php');
 
+//If "Remove Item" selected, item is removed (removes orders-users and orders-products entries).
+if(isset($_GET['delete'])) {
+    DBHelper::insert('DELETE FROM `orders-products` WHERE order_id = ? AND product_id = ? LIMIT 1;', [$_GET['order'], $_GET['product']]);
+}
 
 //Queries the highest-numbered order_ID associated with the logged in user.
 $orderNum = DBHelper::query('SELECT `order_id` FROM `users-orders` WHERE `user_id` = ? ORDER BY `order_id` DESC LIMIT 1;', [$_SESSION['user-id']]);
@@ -77,6 +81,7 @@ if (!$currentOrder->rowCount() == 0) {
                         <div class="card-body">
                             <h5 class="card-title"><?= $product['name'] ?></h5>
                             <p class="card-text"><?= "$" . $product["price"]; ?></p>
+                            <a href="orders.php?delete=true&product=<?=$product['product_ID']?>&order=<?=$orderProduct['order_ID']?>" class="btn btn-danger">Remove Item</a>
                         </div>
                     </div>
                 </div>
