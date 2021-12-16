@@ -20,7 +20,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.php">Home<span class="sr-only"></span></a>
+                    <a class="nav-link" href="../pages/index.php">Home<span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="categories.php">Categories<span class="sr-only"></span></a>
@@ -37,6 +37,9 @@
             </div>
         <?php else : ?>
             <div class="form-inline">
+                <?php if(isset($_SESSION['is_admin'])) : ?> 
+                    <a href="../admin/admin.php" class="mr-sm-2 btn btn-warning">Admin Tools</a>
+                <?php endif; ?>
                 <a href="../auth/sign_out.php" class="mr-sm-2 btn btn-danger">Sign Out</a>
             </div>            
         <?php endif; ?>

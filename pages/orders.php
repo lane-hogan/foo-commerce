@@ -1,17 +1,14 @@
 <?php
+$title = 'Orders';
+require_once('../theme/header.php');
 require_once("../lib/db_util.php");
-session_start();
+
+
 if(!isset($_SESSION['user-id'])) header('Location: index.php');
 //Finds all the different orders associated with one user
 $result = DBHelper::query('SELECT * FROM `users-orders` WHERE user_ID = ?', [$_SESSION['user-id']]);
 $orders = $result->fetchAll();
-?>
-<!DOCTYPE html>
-<html lang="en">
 
-<body>
-
-<?php
 
 //First Loop is to loop through all of the users' current orders
 foreach ($orders as $order) {
@@ -30,35 +27,6 @@ foreach ($orders as $order) {
     <?php }
 } ?>
 
-<nav class="p-2 navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="index.php"><b>FOO-COMMERCE</b></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportContent" aria-controls="navbarSupportContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="index.php">Home<span class="sr-only"></span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="categories.php">Categories</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="orders.php">Orders</a>
-            </li>
-        </ul>
-    </div>
-    <?php if (!isset($_SESSION['is_logged'])) : ?>
-        <div class="form-inline">
-            <a href="../auth/sign_in.php" class="mr-sm-2 btn btn-primary">Sign In</a>
-            <a href="../auth/sign_up.php" class="my-2 my-sm-0 btn btn-primary"">Sign Up</a>
-        </div>
-    <?php else : ?>
-        <li class="nav-item">
-            <a href="../auth/sign_out.php" class="btn btn-primary"">Sign Out</a>
-        </li>
-    <?php endif; ?>
-</nav>
 
 <?php
     //First Loop is to loop through all of the users' current orders
@@ -73,9 +41,14 @@ foreach ($orders as $order) {
             $temp = DBHelper::query('SELECT * FROM `products` WHERE `product_ID` = ?', [$product_ID]);
             $productName = $temp1->fetchAll(); ?>
             <h5><?= "Product Name: " . $productName[$count]['name']; ?></h5>
+            
+            
             <?php $count++ ?>
         <?php endforeach; ?>
     <?php endforeach; ?>
 
+<!--Bootstrap-->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 </body>
 </html>
