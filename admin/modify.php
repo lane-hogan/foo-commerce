@@ -76,7 +76,7 @@ if (isset($_POST['category_name'])){
             <input type="text" name="name" placeholder="Name" class="form-control" required />
         </div>
         <button type="submit" class="btn btn-primary mt-4">Modify</button>
-        <a href="delete.php" class="btn btn-secondary mt-4">Cancel</a>
+        <a href="modify.php" class="btn btn-secondary mt-4">Cancel</a>
     </form>
 </div>
 
@@ -99,7 +99,7 @@ if (isset($_POST['category_name'])){
             <input type="text" name="new_category_name" placeholder="name" class="form-control" required />
         </div>
         <button type="submit" class="btn btn-primary mt-4">Modify</button>
-        <a href="delete.php" class="btn btn-secondary mt-4">Cancel</a>
+        <a href="modify.php" class="btn btn-secondary mt-4">Cancel</a>
     </form>
 </div>
 
