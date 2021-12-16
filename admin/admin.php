@@ -3,7 +3,7 @@ $title = 'Admin Tools';
 require_once('../theme/header.php');
 require_once('../auth/auth.php');
 ?>
-
+<!--Administrative buttons that link to their respective pages-->
 <div style="padding-top: 100px; text-align: center">
     <h1 style="padding-bottom: 20px;">Administration Tools</h1>
     <a href="create.php" class="btn btn-primary">Create</a>
