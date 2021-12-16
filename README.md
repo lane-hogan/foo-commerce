@@ -15,6 +15,6 @@ How to navigate foocommerce
 - Modify: Used for modifying new categories and products
 *Note: Two forms will appear on each of these pages. You can only use ONE of them at a time. For example, on create, you can't create a new category and a new product at once since both forms are separate from each other.
 
-3.)Authenticated users will have access to their own orders page. This works very similar to a cart on other ecommerce websites. ONLY authenticated users can use the "Add to Cart" button to update their order. 
+3.)Authenticated users will have access to their own orders page where they can edit their order. This works very similar to a cart on other ecommerce websites. ONLY authenticated users can use the "Add to Cart" button to update their order. 
 
 4.)Finally, the categories page can be accessed by all users. This page is just a way to view products when they're more organzied. 
