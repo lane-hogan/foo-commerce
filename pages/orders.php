@@ -9,12 +9,10 @@ if(!isset($_SESSION['user-id'])) header('Location: index.php');
 $orderNum = DBHelper::query('SELECT `order_id` FROM `users-orders` WHERE `user_id` = ? ORDER BY `order_id` DESC LIMIT 1;
 ', [$_SESSION['user-id']]);
 $orderNum = $orderNum->fetch();
-echo $orderNum['order_id'];
 
 $isComplete = DBHelper::query('SELECT `is_completed` FROM `orders` WHERE `order_id` = ?;
 ', [$orderNum['order_id']]);
 $isComplete = $isComplete->fetch();
-echo $isComplete['is_completed'];
 
 if ($isComplete == '0') {
     DBHelper::insert('INSERT INTO orders-products(order_id, product_id) VALUES(?, ?)',[$orderNum['order_id'], $_GET['product_id']]); 
