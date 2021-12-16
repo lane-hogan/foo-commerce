@@ -32,13 +32,35 @@ $result = DBHelper::query('SELECT * FROM `orders-products` WHERE `order_id` = ?'
 $order = $result->fetchAll();
 ?>
     <h2><?= "Order #: " . $orderNum['order_id']; ?></h2><?php
-    //Loops through each orders-products associations in the user's current order.
-    foreach ($order as $orderProduct) :
-        print_r($orderProduct);
-        $product = DBHelper::query('SELECT * FROM `products` WHERE `product_id` = ?', [$orderProduct['product_ID']]);
-        $product = $product->fetchAll();
-        ?>
-    <?php endforeach; ?>
+    
+
+
+
+    
+    <div class=" container mt-4">
+        <div class="row" style="margin: 0 auto;">
+            //Loops through each orders-products associations in the user's current order.
+            foreach ($order as $orderProduct) :
+                print_r($orderProduct);
+                $product = DBHelper::query('SELECT * FROM `products` WHERE `product_id` = ?', [$orderProduct['product_ID']]);
+                $product = $product->fetchAll();
+                ?>      
+                <div class="col-md-4" style="padding-bottom: 30px;">
+                    <div class="card border border-dark" style="width: 20rem;">
+                        <a href="detail.php?product_ID=<?= $product['product_ID']; ?>">
+                            <img class="p-2 card-img-top" src="<?= $product["image"]; ?>" alt="product_image" width="286" height="230" alt="">
+                        </a>
+                        <hr/>
+                        <div class="card-body">
+                            <h5 class="card-title"><?= $product['name'] ?></h5>
+                            <p class="card-text"><?= "$" . $product["price"]; ?></p>
+                            <a href="orders.php" class="btn btn-primary">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+    </div>
+</div>
 
 <!--Bootstrap-->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
