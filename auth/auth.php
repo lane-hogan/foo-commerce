@@ -57,6 +57,8 @@ function sign_up($email, $password, $fname, $lname)
  */
 function sign_in($email, $password)
 {
+    //Destroying a session so that incorrect data isn't saved in the session variable depending on the accoutn
+
     if (!isset($email)) ['status' => -1, 'message' => 'Please enter your email'];
     if (!isset($password)) ['status' => -1, 'message' => 'Please enter your email'];
 
@@ -115,7 +117,10 @@ function is_admin()
 {
     if (is_logged()) {
         $result = DBHelper::query('SELECT isAdmin FROM users WHERE user_ID = ? AND isAdmin = 1', [$_SESSION['user-id']]);
-        return $result->rowCount() == 0;
-        //return $result->fetchColumn() == 1;
+        if($result->rowCount() == 0){
+            return false;
+        } else {
+            return true;
+        }
     }
 }
