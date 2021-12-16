@@ -27,7 +27,6 @@ if ($isComplete == '1'){
     DBHelper::insert('INSERT INTO users-orders(order_id, user_id) VALUES(?, ?)',[$orderNum['order_id'],$_SESSION['user-id']]); 
     DBHelper::insert('INSERT INTO orders-products(order_id, product_id) VALUES(?, ?)',[$orderNum['order_id'],$_GET['product_id']]); 
 }
-print_r($orderNum);
 $result = DBHelper::query('SELECT * FROM `orders-products` WHERE `order_id` = ?', [$orderNum['order_id']]);
 $order = $result->fetchAll();
 ?>
@@ -36,14 +35,13 @@ $order = $result->fetchAll();
 
 
 
-    
+    ?>
     <div class=" container mt-4">
-        <div class="row" style="margin: 0 auto;">
+        <div class="row" style="margin: 0 auto;"><?php
             //Loops through each orders-products associations in the user's current order.
             foreach ($order as $orderProduct) :
-                print_r($orderProduct);
                 $product = DBHelper::query('SELECT * FROM `products` WHERE `product_id` = ?', [$orderProduct['product_ID']]);
-                $product = $product->fetchAll();
+                $product = $product->fetch();
                 ?>      
                 <div class="col-md-4" style="padding-bottom: 30px;">
                     <div class="card border border-dark" style="width: 20rem;">
