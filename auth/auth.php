@@ -9,15 +9,19 @@ require_once('../lib/db_util.php');
  * @param string $password password
  * @return array status code and error message
  */
-function sign_up($email, $password)
+function sign_up($email, $password, $fname, $lname)
 {
     // Check if the fields are empty
     if (!isset($email))
         return ['status' => -1, 'message' => 'Please enter your email'];
     if (!isset($password))
-        return ['status' => -1, 'message' => 'Please enter your email'];
-
-    // Check if the email is valid
+        return ['status' => -1, 'message' => 'Please enter your password'];
+    if (!isset($fname))
+        return ['status' => -1, 'message' => 'Please enter your first name'];
+    if (!isset($lname))
+        return ['status' => -1, 'message' => 'Please enter your last name'];
+    
+        // Check if the email is valid
     if (!filter_var($email, FILTER_VALIDATE_EMAIL))
         return ['status' => -1, 'message' => 'Your email is invalid'];
 
@@ -32,13 +36,13 @@ function sign_up($email, $password)
     // Check if the email is in the database already
     $result = DBHelper::query('SELECT * FROM users WHERE email = ?', [$_POST['email']]);
     if ($result->rowCount() > 0)
-        return ['status' => -1, 'message' => 'User exists!'];
+        return ['status' => -1, 'message' => 'User already exists!'];
 
     // Save user in database
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     DBHelper::insert(
-        'INSERT INTO users(email, password, isAdmin) VALUES(?, ?, 0)',
-        [$_POST['email'], $hashedPassword]
+        'INSERT INTO users(email, password, fname, lname, isAdmin) VALUES(?, ?, ?, ?, 0)',
+        [$_POST['email'], $hashedPassword, $_POST['fname'], $_POST['lname']]
     );
 
     return ['status' => 1, 'message' => 'You have been registered!'];
