@@ -19,6 +19,7 @@ $result = DBHelper::query('SELECT * FROM products'); ?>
                     <div class="card-body">
                         <h5 class="card-title"><?= $product['name'] ?></h5>
                         <p class="card-text"><?= "$" . $product["price"]; ?></p>
+                        <!--Conditional Used to check if user is logged in-->
                         <?php if(!isset($_SESSION['user-id'])) { ?>
                             <a href="../auth/sign_up.php" class="btn btn-primary">Add to Cart</a>
                         <?php }

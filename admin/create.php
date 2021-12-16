@@ -45,32 +45,39 @@ if (isset($_POST['product_name'])) {
 <div class="container mt-4 border border-secondary rounded p-4">
     <form action="create.php" method="POST">
         <h5 class="display-5">New Product</h5>
+        <!--Name-->
         <div class="form-group">
             <label for="product_name">Name:</label>
             <input type="text" name="product_name" placeholder="Product name" class="form-control" required />
         </div>
+        <!--Description-->
         <div class="form-group">
             <label for="description">Description:</label>
             <textarea name="description" rows="2" maxlength="300" class="form-control"></textarea>
         </div>
+        <!--Image-->
         <div class="form-group">
             <label for="image">Image:</label>
             <input type="text" name="image" placeholder="Image URL" class="form-control" required />
         </div>
+        <!--Price-->
         <div class="form-group">
             <label for="price">Price:</label>
             <input type="number" min="0.01" step="any" name="price" placeholder="0.00" class="form-control" required />
         </div>
+        <!--Category-->
         <div class="form-group">
             <label for="category">Category:</label>
             <select name="category" id="category" placeholder="---" class="form-control" required>
                 <option>None</option>
+                <!--Loop that provides a drop down list of all the categories for the user to pick-->
                 <?php
                 while ($category = $result->fetch()) : ?>
                     <option value="<?= $category['category_ID'] ?>"><?= $category['name'] ?></option>
                 <?php endwhile; ?>
             </select>
         </div>
+        <!--Submit and Cancel Buttons-->
         <button type="submit" class="btn btn-primary mt-4">Create</button>
         <a href="create.php" class="btn btn-secondary mt-4">Cancel</a>
     </form>
@@ -79,12 +86,13 @@ if (isset($_POST['product_name'])) {
 <!--Create category form-->
 <div class="container mt-4 border border-secondary rounded p-4">
     <form action="create.php" method="POST">
+        <!--New Category-->
         <h5 class="display-5">New Category</h5>
         <div class="form-group">
             <label for="category_name">Name:</label>
             <input type="text" name="category_name" placeholder="Category name" class="form-control" required />
         </div>
-
+        <!--Query that gets all rows from the categories table-->
         <?php 
             $result = DBHelper::query('SELECT * FROM categories');
             while ($category = $result->fetch()) 
