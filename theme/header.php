@@ -25,9 +25,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="categories.php">Categories<span class="sr-only"></span></a>
                 </li>
+                <?php if (isset($_SESSION['is_logged'])) : ?>
                 <li class="nav-item">
                     <a class="nav-link" href="orders.php">Orders</a>
                 </li>
+                <?php endif; ?>
             </ul>
         </div>
         <?php if (!isset($_SESSION['is_logged'])) : ?>
