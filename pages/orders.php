@@ -11,10 +11,10 @@ $orderNum = DBHelper::query('SELECT `order_id` FROM `users-orders` WHERE `user_i
 $orderNum = $orderNum->fetch();
 echo $orderNum['order_id'];
 
-$isComplete = DBHelper::query('SELECT `is_complete` FROM `orders` WHERE `order_id` = ?;
+$isComplete = DBHelper::query('SELECT `is_completed` FROM `orders` WHERE `order_id` = ?;
 ', [$orderNum['order_id']]);
 $isComplete = $isComplete->fetch();
-echo $isComplete['is_complete'];
+echo $isComplete['is_completed'];
 
 if ($isComplete == '0') {
     DBHelper::insert('INSERT INTO orders-products(order_id, product_id) VALUES(?, ?)',[$orderNum['order_id'], $_GET['product_id']]); 
@@ -27,27 +27,17 @@ if ($isComplete == '1'){
     DBHelper::insert('INSERT INTO users-orders(order_id, user_id) VALUES(?, ?)',[$orderNum['order_id'],$_SESSION['user-id']]); 
     DBHelper::insert('INSERT INTO orders-products(order_id, product_id) VALUES(?, ?)',[$orderNum['order_id'],$_GET['product_id']]); 
 }
-
-$result = DBHelper::query('SELECT * FROM `orders-products` WHERE `order_id` = ?', [$orderNum]);
+print_r($orderNum);
+$result = DBHelper::query('SELECT * FROM `orders-products` WHERE `order_id` = ?', [$orderNum['order_id']]);
 $order = $result->fetchAll();
-
+?>
+    <h2><?= "Order #: " . $orderNum['order_id']; ?></h2><?php
     //Loops through each orders-products associations in the user's current order.
-    foreach ($order as $product) :
-        $product = DBHelper::query('SELECT * FROM `products` WHERE `product_id` = ?', [$product['product_id']]);
+    foreach ($order as $orderProduct) :
+        print_r($orderProduct);
+        $product = DBHelper::query('SELECT * FROM `products` WHERE `product_id` = ?', [$orderProduct['product_ID']]);
         $product = $product->fetchAll();
-        
-        /////////////////////
         ?>
-        <h2><?= "Order #: " . $order_ID; ?></h2>
-        <?php foreach ($orderProducts as $orderProduct) :
-            $count = 0;
-            $product_ID = $orderProduct['product_ID'];
-            $temp = DBHelper::query('SELECT * FROM `products` WHERE `product_ID` = ?', [$product_ID]);
-            $productName = $temp->fetchAll(); 
-            ?>
-            <h5><?= "Product Name: " . $productName[$count]['name']; ?></h5>
-            <?php $count++ ?>
-        <?php endforeach; ?>
     <?php endforeach; ?>
 
 <!--Bootstrap-->
