@@ -37,7 +37,12 @@ $categories = $result->fetchAll();
                             <div class="card-body">
                                 <h5 class="card-title"><?= $product['name'] ?></h5>
                                 <p class="card-text"><?= "$" . $product["price"]; ?></p>
-                                <a href="orders.php" class="btn btn-primary">Add to Cart</a>
+                                <?php if(!isset($_SESSION['user-id'])) { ?>
+                                    <a href="../auth/sign_up.php" class="btn btn-primary">Add to Cart</a>
+                                <?php }
+                                else { ?>
+                                    <a href="orders.php?product_id=<?= $product['product_ID'] ?>" class="btn btn-primary">Add to Cart</a> 
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
